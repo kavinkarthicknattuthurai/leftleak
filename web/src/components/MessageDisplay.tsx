@@ -50,7 +50,7 @@ export default function MessageDisplay({ message }: MessageDisplayProps) {
                         components={{
                           p: ({ children }) => {
                             // Process text to bold @usernames and italicize #hashtags only
-                            const processText = (text: any): any => {
+                            const processText = (text: unknown): React.ReactNode => {
                               if (typeof text !== 'string') return text;
                               
                               // Match @usernames and #hashtags
@@ -72,7 +72,7 @@ export default function MessageDisplay({ message }: MessageDisplayProps) {
                             };
                             
                             // Process children recursively
-                            const processChildren = (children: any): any => {
+                            const processChildren = (children: React.ReactNode): React.ReactNode => {
                               if (Array.isArray(children)) {
                                 return children.map((child, i) => {
                                   if (typeof child === 'string') {

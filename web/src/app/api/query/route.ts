@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
     // Fallback to mock data if no backend available
     
     // Generate mock leftist responses based on keywords
-    const mockResponses: Record<string, any> = {
+    const mockResponses: Record<string, { answer: string; sources: string[] }> = {
       'abortion': {
         answer: `This is what leftists on Bluesky are actually saying about abortion rights:
 
