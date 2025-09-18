@@ -50,7 +50,7 @@ export default function MessageDisplay({ message }: MessageDisplayProps) {
                         components={{
                           p: ({ children }) => {
                             // Process text to bold @usernames and italicize #hashtags only
-                            const processText = (text: unknown): React.ReactNode => {
+                            const processText = (text: React.ReactNode): React.ReactNode => {
                               if (typeof text !== 'string') return text;
                               
                               // Match @usernames and #hashtags
