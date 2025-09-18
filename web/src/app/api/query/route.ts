@@ -11,8 +11,30 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // For Vercel demo deployment, we'll use mock data
-    // In production, this would connect to the Python backend
+    // Try to connect to the real backend first
+    const backendUrl = process.env.NEXT_PUBLIC_API_URL || process.env.PYTHON_API_URL || 'http://localhost:8000';
+    
+    // Check if we have a real backend URL (not localhost)
+    if (backendUrl && !backendUrl.includes('localhost')) {
+      try {
+        const response = await fetch(`${backendUrl}/api/query`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ question }),
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          return NextResponse.json(data);
+        }
+      } catch (error) {
+        console.error('Backend connection failed:', error);
+      }
+    }
+
+    // Fallback to mock data if no backend available
     
     // Generate mock leftist responses based on keywords
     const mockResponses: Record<string, any> = {

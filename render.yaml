@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: leftleak-api
+    env: python
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "uvicorn api_server:app --host 0.0.0.0 --port $PORT"
+    envVars:
+      - key: GOOGLE_API_KEY
+        sync: false  # You'll add this in Render dashboard
+      - key: PYTHON_VERSION
+        value: 3.11.0
